@@ -16,6 +16,6 @@ tick();setInterval(tick,1000);document.addEventListener('visibilitychange',tick)
 document.getElementById('download').addEventListener('click',()=>{const blob=new Blob(['<!doctype html>\n'+document.documentElement.outerHTML],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='新西兰南岛旅行手册.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);});
 const offline=document.getElementById('offline-status');
 if(location.protocol==='file:'){offline.textContent='离线文件 · 文字、示意地图与倒计时可用';}
-else if('serviceWorker' in navigator&&isSecureContext){navigator.serviceWorker.register('/sw.js').then(()=>navigator.serviceWorker.ready).then(async()=>{const cache=await caches.open('nz-handbook-offline-v1');if(await cache.match('/'))offline.textContent='离线已就绪 · 同一浏览器可离线重开';else offline.textContent='离线缓存未完成 · 请保存 HTML';}).catch(()=>offline.textContent='可保存 HTML 离线阅读');}
+else if('serviceWorker' in navigator&&isSecureContext){navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(async registration=>{const cache=await caches.open('nz-handbook-offline-v2');if(await cache.match(registration.scope))offline.textContent='离线已就绪 · 同一浏览器可离线重开';else offline.textContent='离线缓存未完成 · 请保存 HTML';}).catch(()=>offline.textContent='可保存 HTML 离线阅读');}
 else offline.textContent='可保存 HTML 离线阅读';
 </script></body></html>
