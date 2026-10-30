@@ -1,4 +1,4 @@
-const CACHE = 'nz-handbook-offline-v2';
+const CACHE = 'nz-handbook-offline-v3';
 const ROOT = new URL('./', self.registration.scope).href;
 const ROOT_PATH = new URL(ROOT).pathname;
 
